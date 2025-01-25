@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trentino Alto Adige Cuisine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #ffffff;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            color: #1a2639;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.8rem;
+            color: #3f4e63;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #3f4e63;
+            border: 1px solid #3f4e63;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #f5f5f5;
+        }
+
+        .food-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-section {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .category-title {
+            width: 100%;
+            padding: 15px 25px;
+            margin: 5px 0;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: #1a2639;
+            background: #ffffff;
+            border: 2px solid #3f4e63;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .category-title:hover {
+            background: #f9f9f9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .food-grid {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .food-grid.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .food-item {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .food-item h3 {
+            font-family: 'Crimson Text', serif;
+            color: #1a2639;
+            margin-bottom: 10px;
+        }
+
+        .food-item p {
+            color: #3f4e63;
+            line-height: 1.6;
+        }
+
+        .food-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #3f4e63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            background: #1a2639;
+            transform: scale(1.1);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Trentino Alto Adige Cuisine</h1>
+        <p>Discover the Alpine flavors of Northern Italy</p>
+        <a href="../index.html" class="back-button">Back to Regions 🏠</a>
+    </div>
+
+    <div class="overlay"></div>
+    
+    <div class="food-container">
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Main Dishes 🍖</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" alt="Canederli">
+                    <h3>Canederli 🥟</h3>
+                    <p>Traditional bread dumplings served in broth or with butter and cheese</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947" alt="Speck Alto Adige">
+                    <h3>Speck Alto Adige 🥓</h3>
+                    <p>Dry-cured, lightly smoked ham typical of South Tyrol</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1547928576-965be7f5f6a6" alt="Polenta e Funghi">
+                    <h3>Polenta e Funghi 🍄</h3>
+                    <p>Creamy cornmeal polenta served with local mushrooms</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1547928576-965be7f5f6a6" alt="Gulasch">
+                    <h3>Gulasch 🥘</h3>
+                    <p>Alpine beef stew with paprika and local herbs</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1547928576-965be7f5f6a6" alt="Spätzle">
+                    <h3>Spätzle 🍝</h3>
+                    <p>Soft egg noodles served with cheese and crispy onions</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1547928576-965be7f5f6a6" alt="Gröstl">
+                    <h3>Gröstl 🥔</h3>
+                    <p>Pan-fried potatoes with meat and eggs</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Local Specialties 🧀</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d" alt="Strangolapreti">
+                    <h3>Strangolapreti 🥬</h3>
+                    <p>Spinach and bread dumplings with butter and sage</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1452195100486-9cc805987862" alt="Trentingrana">
+                    <h3>Trentingrana 🧀</h3>
+                    <p>Local mountain cheese aged for at least 20 months</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a" alt="Schlutzkrapfen">
+                    <h3>Schlutzkrapfen 🥟</h3>
+                    <p>Half-moon shaped pasta filled with spinach and ricotta</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a" alt="Luganega">
+                    <h3>Luganega 🌭</h3>
+                    <p>Traditional local sausage with herbs and spices</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a" alt="Puzzone di Moena">
+                    <h3>Puzzone di Moena 🧀</h3>
+                    <p>Strong-flavored mountain cheese from Val di Fassa</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a" alt="Carne Salada">
+                    <h3>Carne Salada 🥩</h3>
+                    <p>Salted and spiced beef, typically served raw or lightly cooked</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Desserts & Sweets 🍰</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1514508985285-52fa488e199a" alt="Strudel di Mele">
+                    <h3>Strudel di Mele 🍎</h3>
+                    <p>Traditional apple strudel with raisins and cinnamon</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1621236378699-8597faf6a176" alt="Zelten">
+                    <h3>Zelten 🍯</h3>
+                    <p>Christmas fruit cake with nuts, dried fruits, and honey</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551404973-761c83cd8339" alt="Kaiserschmarrn">
+                    <h3>Kaiserschmarrn 🥞</h3>
+                    <p>Shredded pancake served with fruit compote</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551404973-761c83cd8339" alt="Krapfen">
+                    <h3>Krapfen 🍩</h3>
+                    <p>Traditional filled doughnuts with jam or custard</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551404973-761c83cd8339" alt="Linzer Torte">
+                    <h3>Linzer Torte 🥧</h3>
+                    <p>Shortcrust pastry tart with jam and lattice top</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551404973-761c83cd8339" alt="Strauben">
+                    <h3>Strauben 🍯</h3>
+                    <p>Funnel cake served with fruit preserves or powdered sugar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(element) {
+            const foodGrid = element.nextElementSibling;
+            const overlay = document.querySelector('.overlay');
+            foodGrid.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = foodGrid.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        function closeCategory(button) {
+            const foodGrid = button.parentElement;
+            const overlay = document.querySelector('.overlay');
+            foodGrid.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelector('.overlay').addEventListener('click', function() {
+            const activeGrid = document.querySelector('.food-grid.active');
+            if (activeGrid) {
+                activeGrid.classList.remove('active');
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

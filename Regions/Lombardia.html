@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lombardia Cuisine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #ffffff;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            color: #1a2639;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.8rem;
+            color: #3f4e63;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #3f4e63;
+            border: 1px solid #3f4e63;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #f5f5f5;
+        }
+
+        .food-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-section {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .category-title {
+            width: 100%;
+            padding: 15px 25px;
+            margin: 5px 0;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: #1a2639;
+            background: #ffffff;
+            border: 2px solid #3f4e63;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .category-title:hover {
+            background: #f9f9f9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .food-grid {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .food-grid.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .food-item {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .food-item h3 {
+            font-family: 'Crimson Text', serif;
+            color: #1a2639;
+            margin-bottom: 10px;
+        }
+
+        .food-item p {
+            color: #3f4e63;
+            line-height: 1.6;
+        }
+
+        .food-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #3f4e63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            background: #1a2639;
+            transform: scale(1.1);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Lombardia Cuisine</h1>
+        <p>Discover the rich flavors of Milan and the Alpine regions</p>
+        <a href="../index.html" class="back-button">Back to Regions 🏠</a>
+    </div>
+
+    <div class="overlay"></div>
+    
+    <div class="food-container">
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Main Dishes 🍝</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1639024471283-03518883512d" alt="Risotto alla Milanese">
+                    <h3>Risotto alla Milanese 🍚</h3>
+                    <p>Saffron-infused risotto, a classic Milanese dish</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a" alt="Ossobuco">
+                    <h3>Ossobuco 🥩</h3>
+                    <p>Braised veal shanks in white wine and broth</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3" alt="Polenta">
+                    <h3>Polenta con Funghi 🌾</h3>
+                    <p>Creamy cornmeal with wild mushrooms</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db" alt="Cotoletta alla Milanese">
+                    <h3>Cotoletta alla Milanese 🍗</h3>
+                    <p>Breaded veal cutlet, Milan-style</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1547928578-bca3e9c5a0ab" alt="Pizzoccheri">
+                    <h3>Pizzoccheri 🍝</h3>
+                    <p>Buckwheat pasta with potatoes, greens and cheese</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b" alt="Cassoeula">
+                    <h3>Cassoeula 🥘</h3>
+                    <p>Traditional pork and cabbage stew</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Local Specialties 🧀</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1628689469838-524a4a973b8e" alt="Bresaola">
+                    <h3>Bresaola della Valtellina 🥩</h3>
+                    <p>Air-dried, salted beef from Valtellina</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1452195100486-9cc805987862" alt="Gorgonzola">
+                    <h3>Gorgonzola DOP 🧀</h3>
+                    <p>Famous blue cheese from Lombardy region</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1557308536-ee471ef2c390" alt="Casoncelli">
+                    <h3>Casoncelli alla Bergamasca 🥟</h3>
+                    <p>Stuffed pasta with meat, raisins, and amaretti</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d" alt="Salame di Varzi">
+                    <h3>Salame di Varzi 🥓</h3>
+                    <p>Traditional cured pork sausage from Pavia</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1634487359989-3e90c9432133" alt="Mostarda">
+                    <h3>Mostarda di Cremona 🍎</h3>
+                    <p>Candied fruit in mustard-flavored syrup</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1624462966581-bc6d768cbfb3" alt="Taleggio">
+                    <h3>Taleggio DOP 🧀</h3>
+                    <p>Soft, washed-rind cheese from Val Taleggio</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Desserts & Sweets 🍰</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1607920592519-bab2a80f2c74" alt="Panettone">
+                    <h3>Panettone 🍞</h3>
+                    <p>Traditional Christmas sweet bread with candied fruits</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1516919549054-e08258825f80" alt="Torrone">
+                    <h3>Torrone di Cremona 🍯</h3>
+                    <p>Traditional nougat made with honey, nuts, and egg whites</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515037893149-de7f840978e2" alt="Sbrisolona">
+                    <h3>Sbrisolona 🍪</h3>
+                    <p>Crunchy almond cake from Mantova</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" alt="Bussolano">
+                    <h3>Bussolano di Mantova 🥮</h3>
+                    <p>Ring-shaped butter cake with vanilla</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569" alt="Amaretti">
+                    <h3>Amaretti di Saronno 🍪</h3>
+                    <p>Crispy almond-flavored macaroons</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729" alt="Colomba">
+                    <h3>Colomba Pasquale 🕊️</h3>
+                    <p>Easter dove-shaped sweet bread</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(element) {
+            const foodGrid = element.nextElementSibling;
+            const overlay = document.querySelector('.overlay');
+            foodGrid.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = foodGrid.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        function closeCategory(button) {
+            const foodGrid = button.parentElement;
+            const overlay = document.querySelector('.overlay');
+            foodGrid.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelector('.overlay').addEventListener('click', function() {
+            const activeGrid = document.querySelector('.food-grid.active');
+            if (activeGrid) {
+                activeGrid.classList.remove('active');
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

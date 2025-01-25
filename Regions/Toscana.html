@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toscana Cuisine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #ffffff;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            color: #1a2639;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.8rem;
+            color: #3f4e63;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #3f4e63;
+            border: 1px solid #3f4e63;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #f5f5f5;
+        }
+
+        .food-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-section {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .category-title {
+            width: 100%;
+            padding: 15px 25px;
+            margin: 5px 0;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: #1a2639;
+            background: #ffffff;
+            border: 2px solid #3f4e63;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .category-title:hover {
+            background: #f9f9f9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .food-grid {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .food-grid.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .food-item {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .food-item h3 {
+            font-family: 'Crimson Text', serif;
+            color: #1a2639;
+            margin-bottom: 10px;
+        }
+
+        .food-item p {
+            color: #3f4e63;
+            line-height: 1.6;
+        }
+
+        .food-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #3f4e63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            background: #1a2639;
+            transform: scale(1.1);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Toscana Cuisine</h1>
+        <p>Discover the rustic flavors of Florence and the Tuscan countryside</p>
+        <a href="../index.html" class="back-button">Back to Regions 🏠</a>
+    </div>
+
+    <div class="overlay"></div>
+    
+    <div class="food-container">
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Main Dishes 🍖</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1560781290-7dc94c0f8f4f" alt="Bistecca alla Fiorentina">
+                    <h3>Bistecca alla Fiorentina 🥩</h3>
+                    <p>Traditional T-bone steak grilled over oak wood</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" alt="Pappardelle al Cinghiale">
+                    <h3>Pappardelle al Cinghiale 🍝</h3>
+                    <p>Wide pasta ribbons with wild boar ragù</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1608500218890-c4b89a47c9cd" alt="Ribollita">
+                    <h3>Ribollita 🥣</h3>
+                    <p>Hearty vegetable and bread soup</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a" alt="Cacciucco">
+                    <h3>Cacciucco 🐟</h3>
+                    <p>Traditional Livornese fish stew</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601" alt="Peposo">
+                    <h3>Peposo 🥘</h3>
+                    <p>Tuscan black pepper beef stew</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b" alt="Arista">
+                    <h3>Arista 🥓</h3>
+                    <p>Roasted pork loin with herbs</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Appetizers & Street Food 🥖</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f" alt="Crostini Neri">
+                    <h3>Crostini Neri 🍞</h3>
+                    <p>Toasted bread with chicken liver pâté</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1553632557-f2ed9c62c66a" alt="Panzanella">
+                    <h3>Panzanella 🥗</h3>
+                    <p>Bread and tomato salad with fresh vegetables</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002" alt="Schiacciata">
+                    <h3>Schiacciata 🫒</h3>
+                    <p>Tuscan flatbread with olive oil and herbs</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1505575967455-40e256f73376" alt="Crostini di Fegatini">
+                    <h3>Crostini di Fegatini 🍖</h3>
+                    <p>Toasted bread with liver spread</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1573676047786-1ae7b8a8b1b3" alt="Fettunta">
+                    <h3>Fettunta 🍞</h3>
+                    <p>Grilled bread rubbed with garlic and olive oil</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1550507992-eb63ffee0847" alt="Coccoli">
+                    <h3>Coccoli 🧀</h3>
+                    <p>Fried bread dough served with prosciutto and stracchino</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title" onclick="toggleCategory(this)">Desserts & Sweets 🍪</h2>
+            <div class="food-grid">
+                <button class="close-button" onclick="closeCategory(this)">×</button>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1609198092458-38a293c7ac4b" alt="Cantucci">
+                    <h3>Cantucci 🍪</h3>
+                    <p>Almond biscotti served with Vin Santo</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1621955511667-e2c316e4575d" alt="Castagnaccio">
+                    <h3>Castagnaccio 🌰</h3>
+                    <p>Chestnut flour cake with pine nuts and rosemary</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13" alt="Panforte">
+                    <h3>Panforte 🍯</h3>
+                    <p>Traditional Sienese fruit and nut confection</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1515037893149-de7f840978e2" alt="Ricciarelli">
+                    <h3>Ricciarelli 🍪</h3>
+                    <p>Soft almond cookies from Siena</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2" alt="Zuccotto">
+                    <h3>Zuccotto 🍰</h3>
+                    <p>Semi-frozen dessert with ricotta and chocolate</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" alt="Schiacciata alla Fiorentina">
+                    <h3>Schiacciata alla Fiorentina 🍊</h3>
+                    <p>Orange-flavored carnival cake</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(element) {
+            const foodGrid = element.nextElementSibling;
+            const overlay = document.querySelector('.overlay');
+            foodGrid.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = foodGrid.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        function closeCategory(button) {
+            const foodGrid = button.parentElement;
+            const overlay = document.querySelector('.overlay');
+            foodGrid.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelector('.overlay').addEventListener('click', function() {
+            const activeGrid = document.querySelector('.food-grid.active');
+            if (activeGrid) {
+                activeGrid.classList.remove('active');
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
